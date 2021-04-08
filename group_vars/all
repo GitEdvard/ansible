@@ -1,0 +1,11 @@
+
+# Constants for environments
+env_local: "local"
+env_prod: "prod"
+
+env_list:
+- "{{ env_local }}"
+- "{{ env_prod }}"
+
+env_current: "{{ env_local }}"
+

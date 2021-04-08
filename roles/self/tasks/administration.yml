@@ -1,0 +1,85 @@
+---
+
+- name: clone bashrc contents repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/bashrc-contents.git
+    dest: "{{ sources }}/bashrc-contents"
+    update: no
+
+- name: clone linux settings repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/linux-settings.git
+    dest: "{{ sources }}/linux-settings"
+    update: no
+
+- name: remove existing .bashrc file
+  ansible.builtin.file:
+    path: "{{ user_home }}/.bashrc"
+    state: absent
+
+- name: create a symlink for the .bashrc file
+  ansible.builtin.file:
+    src: "{{ sources }}/linux-settings/bashrc"
+    dest: "{{ user_home }}/.bashrc"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: ensure that there is a bin directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/bin"
+    mode: "0755"
+    state: directory
+
+- name: create symlink for bin_work
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/bin_work"
+    dest: "{{ user_home }}/bin/bin_work"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: create symlink for bin_home
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/bin_home"
+    dest: "{{ user_home }}/bin/bin_home"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: create symlink for bin_sysman
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/bin_sysman"
+    dest: "{{ user_home }}/bin/bin_sysman"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: create symlink for completion scripts
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/scripts"
+    dest: "{{ user_home }}/scripts"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: create symlink for git config
+  ansible.builtin.file:
+    src: "{{ sources }}/linux-settings/gitconfig"
+    dest: "{{ user_home }}/.gitconfig"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: install emacs
+  apt:
+    name: emacs25
+    state: present
+
+- name: create symlink for emacs config
+  ansible.builtin.file:
+    src: "{{ sources }}/linux-settings/emacs_dir/emacs"
+    dest: "{{ user_home }}/.emacs"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link

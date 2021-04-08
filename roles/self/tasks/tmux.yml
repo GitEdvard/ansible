@@ -1,0 +1,26 @@
+---
+
+- name: install tmux
+  apt:
+    name: tmux
+    state: present
+
+- name: clone repository for tmux resurrect
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-resurrect
+    dest: "{{ sources }}/tmux-resurrect"
+    update: no
+
+- name: clone repository for tmux-settings
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/tmux_settings.git
+    dest: "{{ sources }}/tmux_settings"
+    update: no
+    
+- name: create a symlink for tmux settings
+  ansible.builtin.file:
+    src: "{{ sources }}/tmux_settings/tmux.conf"
+    dest: "{{ user_home }}/.tmux.conf"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link

@@ -1,0 +1,8 @@
+---
+
+- hosts: self
+  become: true
+  become_method: sudo
+  remote_user: root
+  roles:
+    - { role: self_short }

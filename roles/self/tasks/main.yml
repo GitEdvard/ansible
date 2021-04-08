@@ -1,0 +1,20 @@
+---
+
+- name: print out env_current
+  debug:
+    msg: current_env "{{ env_current }}"
+
+- name: print out home directory
+  debug:
+    msg: user_home "{{ user_home }}"
+
+- import_tasks: create_user.yml
+  when: env_current == env_local
+  tags: local
+
+- import_tasks: init.yml
+  tags: init
+- import_tasks: tmux.yml
+  tags: tmux
+- import_tasks: administration.yml
+  tags: administration

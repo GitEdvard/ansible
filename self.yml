@@ -1,0 +1,26 @@
+---
+
+# to apply on workstation run without inventory flag
+# Run on a local vm: 
+#   ssh in to the vm, then run ssh -T git@github.com and answer "yes" to
+#   the question
+
+# Preparations
+# 1. Ensure that you have agent forwarding in your ~/.ssh/config file
+# 2. Ensure that you have started a private ssh key that give access to all git repositories in this playbook
+# 3. trigger sudo by e.g. "sudo ls"
+# 4. run with
+# ansible-playbook -i /home/edvard/sources/system-management/snpseq/inventories/prod_inventory self.yml
+#   prod-inventory is configured to run on self!
+# (old way) ansible-playbook --connection=local --inventory=127.0.0.1, --limit 127.0.0.1 self.yml
+
+# (alternative), create a key-pair, put the public key into
+# /root/.ssh/authorized_keys/. Then ansible can login as root.
+
+# (old way) - hosts: 127.0.0.1
+- hosts: self
+  become: true
+  become_method: sudo
+  remote_user: root
+  roles:
+    - { role: self }

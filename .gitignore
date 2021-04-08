@@ -1,0 +1,14 @@
+*.swp
+*.swo
+*.vmdk
+*.pyc
+.vault_pass.txt
+.vagrant
+*.retry
+dependencies/roles
+.srl
+obj/
+*.egg-info
+__pycache__
+*cloudimg-console.log
+
