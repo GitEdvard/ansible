@@ -55,6 +55,14 @@
     group: "{{ self_user }}"
     state: link
 
+- name: create symlink for bin_docker
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/bin_docker"
+    dest: "{{ user_home }}/bin/bin_docker"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
 - name: create symlink for completion scripts
   ansible.builtin.file:
     src: "{{ sources }}/bashrc-contents/scripts"
@@ -65,7 +73,7 @@
 
 - name: create symlink for git config
   ansible.builtin.file:
-    src: "{{ sources }}/linux-settings/gitconfig"
+    src: "{{ sources }}/bashrc-contents/gitconfig"
     dest: "{{ user_home }}/.gitconfig"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -80,6 +88,14 @@
   ansible.builtin.file:
     src: "{{ sources }}/linux-settings/emacs_dir/emacs"
     dest: "{{ user_home }}/.emacs"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: create symlink for gitignore-system
+  ansible.builtin.file:
+    src: "{{ sources }}/bashrc-contents/gitignore-system"
+    dest: "{{ user_home }}/.gitignore-system"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link

@@ -1,8 +1,19 @@
 ---
 
-- name: install tmux
+- name: install tmux old installation
   apt:
     name: tmux
+    state: present
+
+
+- name: install prerequisite for tmux 3.2, libevent-dev (I couldnt do the actual installation from ansible)
+  ansible.builtin.apt:
+    name: libevent-dev
+    state: present
+
+- name: install prerequisit for tmux 3.2, ncurses-dev (I couldnt do the actual installation from ansible)
+  ansible.builtin.apt:
+    name: ncurses-dev
     state: present
 
 - name: clone repository for tmux resurrect
@@ -16,7 +27,7 @@
     repo: git@github.com:GitEdvard/tmux_settings.git
     dest: "{{ sources }}/tmux_settings"
     update: no
-    
+
 - name: create a symlink for tmux settings
   ansible.builtin.file:
     src: "{{ sources }}/tmux_settings/tmux.conf"
