@@ -3,13 +3,13 @@
 - name: clone bashrc contents repository
   ansible.builtin.git:
     repo: git@github.com:GitEdvard/bashrc-contents.git
-    dest: "{{ sources }}/bashrc-contents"
+    dest: "{{ sources_adm }}/bashrc-contents"
     update: no
 
 - name: clone linux settings repository
   ansible.builtin.git:
     repo: git@github.com:GitEdvard/linux-settings.git
-    dest: "{{ sources }}/linux-settings"
+    dest: "{{ sources_adm }}/linux-settings"
     update: no
 
 - name: remove existing .bashrc file
@@ -19,7 +19,7 @@
 
 - name: create a symlink for the .bashrc file
   ansible.builtin.file:
-    src: "{{ sources }}/linux-settings/bashrc"
+    src: "{{ sources_adm }}/linux-settings/bashrc"
     dest: "{{ user_home }}/.bashrc"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -33,7 +33,7 @@
 
 - name: create symlink for bin_work
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/bin_work"
+    src: "{{ sources_adm }}/bashrc-contents/bin_work"
     dest: "{{ user_home }}/bin/bin_work"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -41,7 +41,7 @@
 
 - name: create symlink for bin_home
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/bin_home"
+    src: "{{ sources_adm }}/bashrc-contents/bin_home"
     dest: "{{ user_home }}/bin/bin_home"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -49,7 +49,7 @@
 
 - name: create symlink for bin_sysman
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/bin_sysman"
+    src: "{{ sources_adm }}/bashrc-contents/bin_sysman"
     dest: "{{ user_home }}/bin/bin_sysman"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -57,7 +57,7 @@
 
 - name: create symlink for bin_docker
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/bin_docker"
+    src: "{{ sources_adm }}/bashrc-contents/bin_docker"
     dest: "{{ user_home }}/bin/bin_docker"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -65,7 +65,7 @@
 
 - name: create symlink for completion scripts
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/scripts"
+    src: "{{ sources_adm }}/bashrc-contents/scripts"
     dest: "{{ user_home }}/scripts"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -73,7 +73,7 @@
 
 - name: create symlink for git config
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/gitconfig"
+    src: "{{ sources_adm }}/bashrc-contents/gitconfig"
     dest: "{{ user_home }}/.gitconfig"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -86,7 +86,7 @@
 
 - name: create symlink for emacs config
   ansible.builtin.file:
-    src: "{{ sources }}/linux-settings/emacs_dir/emacs"
+    src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
     dest: "{{ user_home }}/.emacs"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -94,7 +94,7 @@
 
 - name: create symlink for gitignore-system
   ansible.builtin.file:
-    src: "{{ sources }}/bashrc-contents/gitignore-system"
+    src: "{{ sources_adm }}/bashrc-contents/gitignore-system"
     dest: "{{ user_home }}/.gitignore-system"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
