@@ -1,0 +1,19 @@
+- name: fetch vim from git
+  git:
+    repo: https://github.com/vim/vim.git
+    dest: "{{ sources_other }}/vim"
+     
+- name: Uninstall vim
+  apt:
+    name: vim
+    state: absent
+
+- name: run make in vim repo
+  make:
+    chdir: "{{ sources_other }}/vim/src"
+
+- name: make install vim
+  make:
+    chdir: "{{ sources_other }}/vim/src"
+    target: install
+

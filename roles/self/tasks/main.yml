@@ -14,7 +14,12 @@
 
 - import_tasks: init.yml
   tags: init
+
+- import_tasks: vim.yml
+  tags: vim
+
 - import_tasks: tmux.yml
   tags: tmux
+
 - import_tasks: administration.yml
   tags: administration
