@@ -5,3 +5,5 @@ user_home: /home/edvard
 self_user: edvard
 
 sources_adm: /home/edvard/sources/admin
+
+sources_other: /home/edvard/sources/other
