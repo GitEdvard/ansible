@@ -95,3 +95,11 @@
     group: "{{ self_user }}"
     state: link
 
+- name: create symlink for the dot-ackrc file
+  file: 
+    src: "{{ sources_adm }}/bashrc-contents/ackrc"
+    dest: "{{ user_home }}/.ackrc"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+  tags: now
