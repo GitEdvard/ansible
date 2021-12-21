@@ -109,3 +109,5 @@
 
 - name: install fzf
   command: ~/.fzf/install --all
+  become: yes
+  become_user: edvard
