@@ -79,11 +79,6 @@
     group: "{{ self_user }}"
     state: link
 
-- name: install emacs
-  apt:
-    name: emacs25
-    state: present
-
 - name: create symlink for emacs config
   ansible.builtin.file:
     src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
@@ -100,16 +95,3 @@
     group: "{{ self_user }}"
     state: link
 
-- name: download fzf git repo
-  ansible.builtin.git:
-    repo: https://github.com/junegunn/fzf.git
-    depth: 1
-    dest: /home/edvard/.fzf
-    update: no
-  tags: fzf
-
-- name: install fzf
-  become: yes
-  become_user: edvard
-  command: /home/edvard/.fzf/install --all
-  tags: fzf
