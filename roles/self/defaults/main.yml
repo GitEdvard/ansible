@@ -7,3 +7,5 @@ self_user: edvard
 sources_adm: /home/edvard/sources/admin
 
 sources_other: /home/edvard/sources/other
+
+sources_test: /home/edvard/sources/test

@@ -22,3 +22,11 @@
   become_user: edvard
   command: /home/edvard/.fzf/install --all
   tags: fzf
+
+- name: install common packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ripgrep
+  tags: skip 

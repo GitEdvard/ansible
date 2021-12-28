@@ -2,7 +2,8 @@
   git:
     repo: https://github.com/vim/vim.git
     dest: "{{ sources_other }}/vim"
-     
+  tags: skip
+
 - name: Uninstall vim
   apt:
     name: vim
@@ -11,6 +12,31 @@
 - name: intall compiled vim with support for ruby, python etc. 
   apt:
     name: vim-nox
+  tags: skip
+
+# fetch nvim.appimage from github by hand!!!
+
+- name: Create config directory for nvim
+  file:
+    path: /home/edvard/.config/nvim
+    state: directory
+  tags: now
+
+- name: Deploy init.vim file 
+  copy:
+    src: init.vim
+    dest: /home/edvard/.config/nvim/init.vim
+  tags: now
+  
+- name: Fetch Jeremy Kahns dotfiles repo
+  git:
+    repo: https://github.com/jeremyckahn/dotfiles.git
+    dest: "{{ sources_test }}/dotfiles"
+
+- name: Fetch Jeremy Kahns vim-docker-env repo
+  git:
+    repo: https://github.com/jeremyckahn/vim-docker-env.git
+    dest: "{{ sources_test }}/vim-docker-env"
 
 #- name: run make distclean for idempotency
 #  make:

@@ -102,4 +102,3 @@
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link
-  tags: now
