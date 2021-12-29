@@ -3,6 +3,7 @@
     repo: https://github.com/vim/vim.git
     dest: "{{ sources_other }}/vim"
   tags: skip
+  when: false
 
 - name: Uninstall vim
   apt:
@@ -13,8 +14,16 @@
   apt:
     name: vim-nox
   tags: skip
+  when: false
 
-# fetch nvim.appimage from github by hand!!!
+- name: fetch nvim executable
+  become: yes
+  become_user: edvard
+  get_url:
+    url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    dest: /home/edvard/bin/nvim
+    mode: '0740'
+  tags: now
 
 - name: Create config directory for nvim
   file:
