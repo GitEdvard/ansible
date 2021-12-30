@@ -23,19 +23,16 @@
     url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
     dest: /home/edvard/bin/nvim
     mode: '0740'
-  tags: now
 
 - name: Create config directory for nvim
   file:
     path: /home/edvard/.config/nvim
     state: directory
-  tags: now
 
 - name: Deploy init.vim file 
   copy:
     src: init.vim
     dest: /home/edvard/.config/nvim/init.vim
-  tags: now
   
 - name: Fetch Jeremy Kahns dotfiles repo
   git:

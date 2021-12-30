@@ -23,6 +23,15 @@
   command: /home/edvard/.fzf/install --all
   tags: fzf
 
+- name: fetch lazygit
+  become: yes
+  become_user: edvard
+  get_url:
+    url: https://github.com/jesseduffield/lazygit/releases/download/v0.31.4/lazygit_0.31.4_Linux_x86_64.tar.gz
+    dest: /home/edvard/bin/lazygit
+    mode: '0740'
+  tags: now
+
 - name: install common packages
   apt:
     name: "{{ item }}"
