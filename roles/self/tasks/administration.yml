@@ -25,6 +25,21 @@
     group: "{{ self_user }}"
     state: link
 
+- name: remove existing .profile file
+  file:
+    path: "{{ user_home }}/.profile"
+    state: absent
+  tags: now
+
+- name: create a symlink for the .profile file
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/bashrc-contents/profile_home/profile"
+    dest: "{{ user_home }}/.profile"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+  tags: now
+
 - name: ensure that there is a bin directory
   ansible.builtin.file:
     path: "{{ user_home }}/bin"

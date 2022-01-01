@@ -20,3 +20,13 @@
     - build-essential
     - make 
     - libncurses-dev
+    - git
+    - ack
+
+- name: install common packages, that might be problematic
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ripgrep
+  tags: skip 
