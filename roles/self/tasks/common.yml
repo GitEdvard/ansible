@@ -3,7 +3,6 @@
   file:
     path: /tmp/homebrew_install.sh
     state: absent
-  tags: now
 
 - name: download homebrew
   become: yes
@@ -12,18 +11,24 @@
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
     dest: /tmp/homebrew_install.sh
     mode: '0550'
-  tags: now
 
 - name: Install homebrew
   become: yes
   become_user: edvard
   command: /tmp/homebrew_install.sh 
-  tags: now
 
 - name: Activate homebrew without restarting
   become: yes
   become_user: edvard
   command: /home/linuxbrew/.linuxbrew/bin/brew shellenv 
+
+- name: install lazygit through homebrew
+  # requires: ansible-galaxy collection install community.general
+  become: yes
+  become_user: edvard
+  community.general.homebrew:
+    name: lazygit
+    state: present
   tags: now
 
 - name: install emacs
@@ -44,12 +49,4 @@
   become_user: edvard
   command: /home/edvard/.fzf/install --all
   tags: fzf
-
-- name: fetch lazygit
-  become: yes
-  become_user: edvard
-  get_url:
-    url: https://github.com/jesseduffield/lazygit/releases/download/v0.31.4/lazygit_0.31.4_Linux_x86_64.tar.gz
-    dest: /home/edvard/bin/lazygit
-    mode: '0550'
 

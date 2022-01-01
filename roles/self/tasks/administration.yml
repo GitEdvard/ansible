@@ -29,7 +29,6 @@
   file:
     path: "{{ user_home }}/.profile"
     state: absent
-  tags: now
 
 - name: create a symlink for the .profile file
   ansible.builtin.file:
@@ -38,7 +37,6 @@
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link
-  tags: now
 
 - name: ensure that there is a bin directory
   ansible.builtin.file:
