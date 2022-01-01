@@ -1,5 +1,13 @@
 
+- name: Remove previous downloaded installfile (idempotence)
+  file:
+    path: /tmp/homebrew_install.sh
+    state: absent
+  tags: now
+
 - name: download homebrew
+  become: yes
+  become_user: edvard
   get_url:
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
     dest: /tmp/homebrew_install.sh
@@ -15,7 +23,7 @@
 - name: Activate homebrew without restarting
   become: yes
   become_user: edvard
-  command: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" 
+  command: /home/linuxbrew/.linuxbrew/bin/brew shellenv 
   tags: now
 
 - name: install emacs
