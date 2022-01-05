@@ -44,6 +44,14 @@
     repo: https://github.com/jeremyckahn/vim-docker-env.git
     dest: "{{ sources_test }}/vim-docker-env"
 
+- name: Install jsonlint through homebrew
+  become: yes
+  become_user: edvard
+  community.general.homebrew:
+    name: jsonlint
+    state: present
+  tags: now
+
 #- name: run make distclean for idempotency
 #  make:
 #    chdir: "{{ sources_other }}/vim/src"

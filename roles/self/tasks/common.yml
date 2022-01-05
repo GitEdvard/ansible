@@ -14,7 +14,6 @@
   community.general.homebrew:
     name: tig
     state: present
-  tags: now
 
 - name: install emacs
   apt:
