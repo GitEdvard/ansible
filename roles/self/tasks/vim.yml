@@ -34,6 +34,19 @@
     src: init.vim
     dest: /home/edvard/.config/nvim/init.vim
   
+- name: Install pynvim for python 3 so that I can install python vim modules
+  pip:
+    name: pynvim
+    extra_args: "--user --upgrade"
+    executable: pip3
+
+- name: Install pynvim for python 2 
+  pip:
+    name: pynvim
+    extra_args: "--user --upgrade"
+    executable: pip
+  tags: now
+
 - name: Fetch Jeremy Kahns dotfiles repo
   git:
     repo: https://github.com/jeremyckahn/dotfiles.git
@@ -50,7 +63,6 @@
   community.general.homebrew:
     name: jsonlint
     state: present
-  tags: now
 
 #- name: run make distclean for idempotency
 #  make:
