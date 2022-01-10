@@ -1,5 +1,20 @@
 
 
+- name: Install node trough homebrew
+  become: yes
+  become_user: edvard
+  community.general.homebrew:
+    name: node
+    state: present
+
+# See also https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
+- name: Install yarn trough homebrew
+  become: yes
+  become_user: edvard
+  community.general.homebrew:
+    name: yarn
+    state: present
+
 - name: install lazygit through homebrew
   # requires: ansible-galaxy collection install community.general
   become: yes
