@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 require_relative "../vagrant/shared"
+require_relative "../vagrant/key_authorization"
 
 VAGRANTFILE_API_VERSION = "2"
 
@@ -9,5 +10,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   shared_config "self", config
   config.vm.box = "ubuntu/bionic64"
   config.vm.provision "ansible", playbook: "deploy.yaml"
+  authorize_key_for_root config, 'edvard', '../vagrant/obj/ssh/local.pub', '~/.ssh/id_dsa.pub', '~/.ssh/id_rsa.pub'
 end
 
