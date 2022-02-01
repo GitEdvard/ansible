@@ -3,6 +3,12 @@
 env_local: "local"
 env_prod: "prod"
 
+self_user: edvard
+user_home: /home/edvard
+sources_adm: /home/edvard/sources/admin
+sources_other: /home/edvard/sources/other
+sources_test: /home/edvard/sources/test
+
 env_list:
 - "{{ env_local }}"
 - "{{ env_prod }}"

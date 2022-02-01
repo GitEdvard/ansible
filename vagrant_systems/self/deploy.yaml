@@ -6,13 +6,13 @@
       user:
         state: present
         shell: /bin/bash
-        name: edvard
+        name: "{{ self_user }}"
         password: "{{ 'Password1' | password_hash('sha512') }}"
         update_password: on_create
     - name: sudo
       copy:
         dest: /etc/sudoers.d/tux
-        content: "edvard ALL=(root) NOPASSWD: ALL"
+        content: "{{ self_user }} ALL=(root) NOPASSWD: ALL"
     - name: edit_sshd
       lineinfile:
         path: /etc/ssh/sshd_config
