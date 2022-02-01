@@ -48,7 +48,6 @@ def authorize_key_for_root(config, user="root", *key_paths)
           "rm -f /vagrant/root_pubkey && " +
           'echo "Done!"'
      end
-    
      break
     end
   end

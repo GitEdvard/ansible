@@ -15,10 +15,10 @@
 
 - name: install essential packages
   apt:
-    name: "{{ item }}" 
+    name: "{{ item }}"
   loop:
     - build-essential
-    - make 
+    - make
     - libncurses-dev
     - git
     - ack
@@ -29,7 +29,7 @@
     state: present
   loop:
     - ripgrep
-  tags: skip 
+  tags: skip
 
 - name: Remove previous downloaded installfile (idempotence)
   file:
@@ -47,9 +47,9 @@
 - name: Install homebrew
   become: yes
   become_user: edvard
-  command: /tmp/homebrew_install.sh 
+  command: /tmp/homebrew_install.sh
 
 - name: Activate homebrew without restarting
   become: yes
   become_user: edvard
-  command: /home/linuxbrew/.linuxbrew/bin/brew shellenv 
+  command: /home/linuxbrew/.linuxbrew/bin/brew shellenv
