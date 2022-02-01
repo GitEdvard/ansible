@@ -1,7 +1,7 @@
 ---
 
 # to apply on workstation run without inventory flag
-# Run on a local vm: 
+# Run on a local vm:
 #   ssh in to the vm, then run ssh -T git@github.com and answer "yes" to
 #   the question
 

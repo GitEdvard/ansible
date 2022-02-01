@@ -8,5 +8,6 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   shared_config "self", config
   config.vm.box = "ubuntu/bionic64"
+  config.vm.provision "ansible", playbook: "deploy.yaml"
 end
 
