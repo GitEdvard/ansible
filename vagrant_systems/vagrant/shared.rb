@@ -1,4 +1,3 @@
-require_relative "key_authorization"
 require_relative "private_dns"
 
 # The provisioning script we'll run on all of our Vagrant machines. We'll
@@ -19,8 +18,6 @@ def shared_config(key, config)
 
     # Default to ubuntu, can be overriden in the Vagrantfile
     config.vm.box = "ubuntu/trusty64"
-
-    authorize_key_for_root config, 'root', '../vagrant/obj/ssh/local.pub', '~/.ssh/id_dsa.pub', '~/.ssh/id_rsa.pub'
 
     config.vm.provision :shell, :inline => $shared_provision_script
 end
