@@ -8,10 +8,6 @@
   debug:
     msg: user_home "{{ user_home }}"
 
-- import_tasks: create_user.yml
-  when: env_current == env_local
-  tags: local
-
 - import_tasks: init.yml
   tags: init
 
