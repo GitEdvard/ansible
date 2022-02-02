@@ -36,7 +36,7 @@
 
 - name: download homebrew
   become: yes
-  become_user: edvard
+  become_user: "{{ self_user }}"
   get_url:
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
     dest: /tmp/homebrew_install.sh
@@ -44,10 +44,10 @@
 
 - name: Install homebrew
   become: yes
-  become_user: edvard
+  become_user: "{{ self_user }}"
   command: /tmp/homebrew_install.sh
 
 - name: Activate homebrew without restarting
   become: yes
-  become_user: edvard
+  become_user: "{{ self_user }}"
   command: /home/linuxbrew/.linuxbrew/bin/brew shellenv

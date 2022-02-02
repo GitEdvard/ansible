@@ -18,21 +18,21 @@
 
 - name: fetch nvim executable
   become: yes
-  become_user: edvard
+  become_user: "{{ self_user }}"
   get_url:
     url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-    dest: /home/edvard/bin/nvim
+    dest: "/home/{{ self_user }}/bin/nvim"
     mode: '0740'
 
 - name: Create config directory for nvim
   file:
-    path: /home/edvard/.config/nvim
+    path: "{{ self_user }}/.config/nvim"
     state: directory
 
 - name: Deploy init.vim file 
   copy:
     src: init.vim
-    dest: /home/edvard/.config/nvim/init.vim
+    dest: "{{ self_user }}/.config/nvim/init.vim"
   
 - name: Install pynvim for python 3 so that I can install python vim modules
   pip:
@@ -59,7 +59,7 @@
 
 - name: Install jsonlint through homebrew
   become: yes
-  become_user: edvard
+  become_user: "{{ self_user }}"
   community.general.homebrew:
     name: jsonlint
     state: present
