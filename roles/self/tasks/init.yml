@@ -12,6 +12,7 @@
     cache_valid_time: 86400 #One day
 
 - name: install essential packages
+  become: true
   apt:
     name: "{{ item }}"
   loop:
@@ -22,6 +23,7 @@
     - ack
 
 - name: install common packages, that might be problematic
+  become: true
   apt:
     name: "{{ item }}"
     state: present
@@ -35,19 +37,19 @@
     state: absent
 
 - name: download homebrew
-  become: yes
-  become_user: "{{ self_user }}"
   get_url:
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
     dest: /tmp/homebrew_install.sh
-    mode: '0550'
+    mode: '0750'
 
 - name: Install homebrew
-  become: yes
-  become_user: "{{ self_user }}"
   command: /tmp/homebrew_install.sh
 
 - name: Activate homebrew without restarting
-  become: yes
-  become_user: "{{ self_user }}"
-  command: /home/linuxbrew/.linuxbrew/bin/brew shellenv
+  shell: /home/linuxbrew/.linuxbrew/bin/brew shellenv
+
+- name: Add brew into global PATH environment variable
+  become: true
+  copy:
+    dest: /etc/profile.d/brew_path.sh
+    content: 'PATH=$PATH:/home/linuxbrew/.linuxbrew/bin'

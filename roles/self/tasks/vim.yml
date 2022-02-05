@@ -9,16 +9,16 @@
   apt:
     name: vim
     state: absent
+  when: false
 
-- name: intall compiled vim with support for ruby, python etc. 
+- name: install compiled vim with support for ruby, python etc. 
+  become: true
   apt:
     name: vim-nox
   tags: skip
   when: false
 
 - name: fetch nvim executable
-  become: yes
-  become_user: "{{ self_user }}"
   get_url:
     url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
     dest: "/home/{{ self_user }}/bin/nvim"
@@ -29,23 +29,22 @@
     path: "{{ self_user }}/.config/nvim"
     state: directory
 
-- name: Deploy init.vim file 
+- name: Deploy init.vim file
   copy:
     src: init.vim
     dest: "{{ self_user }}/.config/nvim/init.vim"
-  
+
 - name: Install pynvim for python 3 so that I can install python vim modules
   pip:
     name: pynvim
     extra_args: "--user --upgrade"
     executable: pip3
 
-- name: Install pynvim for python 2 
+- name: Install pynvim for python 2
   pip:
     name: pynvim
     extra_args: "--user --upgrade"
     executable: pip
-  tags: now
 
 - name: Fetch Jeremy Kahns dotfiles repo
   git:
@@ -58,8 +57,6 @@
     dest: "{{ sources_test }}/vim-docker-env"
 
 - name: Install jsonlint through homebrew
-  become: yes
-  become_user: "{{ self_user }}"
   community.general.homebrew:
     name: jsonlint
     state: present

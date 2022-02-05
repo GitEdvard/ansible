@@ -19,8 +19,5 @@
 
 # (old way) - hosts: 127.0.0.1
 - hosts: self
-  become: true
-  become_method: sudo
-  become_user: root
   roles:
     - { role: self }

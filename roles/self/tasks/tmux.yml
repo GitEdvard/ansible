@@ -1,17 +1,20 @@
 ---
 
 - name: install tmux old installation
+  become: yes
   apt:
     name: tmux
     state: present
 
 
 - name: install prerequisite for tmux 3.2, libevent-dev (I couldnt do the actual installation from ansible)
+  become: yes
   ansible.builtin.apt:
     name: libevent-dev
     state: present
 
 - name: install prerequisit for tmux 3.2, ncurses-dev (I couldnt do the actual installation from ansible)
+  become: yes
   ansible.builtin.apt:
     name: ncurses-dev
     state: present
