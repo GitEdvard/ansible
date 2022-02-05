@@ -9,17 +9,28 @@
         name: "{{ self_user }}"
         password: "{{ 'Password1' | password_hash('sha512') }}"
         update_password: on_create
+
     - name: sudo
       copy:
         dest: /etc/sudoers.d/tux
         content: "{{ self_user }} ALL=(root) NOPASSWD: ALL"
-    - name: edit_sshd
+
+    - name: allow password authentication
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^PasswordAuthentication'
         line: 'PasswordAuthentication yes'
         insertafter: '^#PasswordAuthentication'
       notify: restart_sshd
+
+    - name: allow ssh forward agent
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^AllowAgentForwarding'
+        insertafter: '#AllowAgentForwarding'
+        line: AllowAgentForwarding yes
+      notify: restart_sshd
+
     - name: authorized_keys
       authorized_key:
         user: "{{ item }}"
@@ -29,6 +40,7 @@
       loop:
         - "{{ self_user }}"
         - 'root'
+
   handlers:
     - name: restart_sshd
       service:
