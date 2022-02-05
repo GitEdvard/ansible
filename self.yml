@@ -10,8 +10,8 @@
 # 2. Ensure that you have started a private ssh key that give access to all git repositories in this playbook
 # 3. trigger sudo by e.g. "sudo ls"
 # 4. run with
-# ansible-playbook -i /home/edvard/sources/admin/ansible/inventories/dev_inventory self.yml
-#   dev-inventory is configured to run on self!
+# ansible-playbook -i /home/edvard/sources/admin/ansible/inventories/local_inventory self.yml
+#   local-inventory is configured to run on self!
 # (old way) ansible-playbook --connection=local --inventory=127.0.0.1, --limit 127.0.0.1 self.yml
 
 # (alternative), create a key-pair, put the public key into

@@ -1,8 +1,11 @@
-# local
+# dev
 
 [self]
-self.snpseq.local
+localhost
+
+localhost ansible_connection=local
+
 
 # Environment
-[env_local:children]
+[env_dev:children]
 self

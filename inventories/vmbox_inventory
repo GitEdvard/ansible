@@ -1,0 +1,8 @@
+# local
+
+[self]
+self.snpseq.local
+
+# Environment
+[env_local:children]
+self

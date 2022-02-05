@@ -5,6 +5,7 @@
   apt:
     name: tmux
     state: present
+  when: false
 
 
 - name: install prerequisite for tmux 3.2, libevent-dev (I couldnt do the actual installation from ansible)
@@ -30,7 +31,6 @@
     repo: git@github.com:GitEdvard/tmux_settings.git
     dest: "{{ sources_adm }}/tmux_settings"
     update: no
-  tags: now
 
 - name: create a symlink for tmux settings
   ansible.builtin.file:
