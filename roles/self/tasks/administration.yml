@@ -38,12 +38,6 @@
     group: "{{ self_user }}"
     state: link
 
-- name: ensure that there is a bin directory
-  ansible.builtin.file:
-    path: "{{ user_home }}/bin"
-    mode: "0755"
-    state: directory
-
 - name: create symlink for bin_work
   ansible.builtin.file:
     src: "{{ sources_adm }}/bashrc-contents/bin_work"

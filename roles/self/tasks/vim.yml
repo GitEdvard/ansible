@@ -11,7 +11,7 @@
     state: absent
   when: false
 
-- name: install compiled vim with support for ruby, python etc. 
+- name: install compiled vim with support for ruby, python etc.
   become: true
   apt:
     name: vim-nox
@@ -60,6 +60,7 @@
   community.general.homebrew:
     name: jsonlint
     state: present
+    path: '/home/linuxbrew/.linuxbrew/bin'
 
 #- name: run make distclean for idempotency
 #  make:

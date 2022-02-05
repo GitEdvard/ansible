@@ -5,7 +5,6 @@
     name: node
     state: present
     path: '/home/linuxbrew/.linuxbrew/bin'
-  tags: now
 
 # See also https://stackoverflow.com/questions/46013544/yarn-install-command-error-no-such-file-or-directory-install
 - name: Install yarn trough homebrew

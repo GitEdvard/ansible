@@ -19,5 +19,6 @@
 
 # (old way) - hosts: 127.0.0.1
 - hosts: self
+  gather_facts: false
   roles:
     - { role: self }

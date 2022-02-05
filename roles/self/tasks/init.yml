@@ -5,6 +5,12 @@
     path: "{{ sources_adm }}"
     state: directory
 
+- name: ensure that there is a bin directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/bin"
+    mode: "0755"
+    state: directory
+
 - name: Update apt packages
   become: true
   apt:
@@ -21,6 +27,8 @@
     - libncurses-dev
     - git
     - ack
+    - python-pip
+    - python3-pip
 
 - name: install common packages, that might be problematic
   become: true
