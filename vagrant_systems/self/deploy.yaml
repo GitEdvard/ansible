@@ -31,6 +31,23 @@
         line: AllowAgentForwarding yes
       notify: restart_sshd
 
+    - name: Tell the host about our servers it might want to ssh to
+      known_hosts:
+        path: '/etc/ssh/known_hosts'
+        name: 'github.com'
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+
+    - name: Upload sudo config for key forwarding as root
+      lineinfile:
+        dest: /etc/sudoers.d/ssh_key_forward
+        line: 'Defaults env_keep+=SSH_AUTH_SOCK'
+        create: yes
+        owner: root
+        group: root
+        mode: "0440"
+        state: present
+        validate: 'visudo -c -f %s'
+
     - name: authorized_keys
       authorized_key:
         user: "{{ item }}"
