@@ -1,3 +1,17 @@
+- name: install nvim through homebrew
+  # requires: ansible-galaxy collection install community.general
+  community.general.homebrew:
+    name: nvim
+    state: present
+    path: '/home/linuxbrew/.linuxbrew/bin'
+
+- name: install ripgrep through homebrew
+  # requires: ansible-galaxy collection install community.general
+  community.general.homebrew:
+    name: ripgrep
+    state: present
+    path: '/home/linuxbrew/.linuxbrew/bin'
+
 - name: fetch vim from git
   git:
     repo: https://github.com/vim/vim.git

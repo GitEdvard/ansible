@@ -30,15 +30,6 @@
     - python-pip
     - python3-pip
 
-- name: install common packages, that might be problematic
-  become: true
-  apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - ripgrep
-  tags: skip
-
 - name: Remove previous downloaded installfile (idempotence)
   file:
     path: /tmp/homebrew_install.sh
