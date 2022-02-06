@@ -8,17 +8,33 @@
   when: false
 
 
-- name: install prerequisite for tmux 3.2, libevent-dev (I couldnt do the actual installation from ansible)
+- name: install prerequisites for tmux (v3.2)
   become: yes
   ansible.builtin.apt:
-    name: libevent-dev
+    name: "{{ item }}"
     state: present
+  loop:
+    - libevent-dev
+    - ncurses-dev
+    - automake
+    - pkg-config
+    - bison
+    - byacc
 
-- name: install prerequisit for tmux 3.2, ncurses-dev (I couldnt do the actual installation from ansible)
-  become: yes
-  ansible.builtin.apt:
-    name: ncurses-dev
-    state: present
+- name: clone repository for tmux
+  git:
+    repo: https://github.com/tmux/tmux
+    dest: "{{ sources_other }}/tmux"
+    update: no
+
+- name: run tmux configure
+  shell: "sh autogen.sh; ./configure"
+  args:
+    chdir: "{{ sources_other }}/tmux"
+
+- name: make tmux
+  make:
+    chdir: "{{ sources_other }}/tmux"
 
 - name: clone repository for tmux resurrect
   ansible.builtin.git:
