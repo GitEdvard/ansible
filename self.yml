@@ -1,10 +1,5 @@
 ---
 
-# to apply on workstation run without inventory flag
-# Run on a local vm:
-#   ssh in to the vm, then run ssh -T git@github.com and answer "yes" to
-#   the question
-
 # Preparations
 # 1. Ensure that you have agent forwarding in your ~/.ssh/config file
 # 2. Ensure that you have started a private ssh key that give access to all git repositories in this playbook
