@@ -76,20 +76,3 @@
     state: present
     path: '/home/linuxbrew/.linuxbrew/bin'
 
-#- name: run make distclean for idempotency
-#  make:
-#    chdir: "{{ sources_other }}/vim/src"
-#    target: distclean
-#
-#- name: configure the compilation
-#  shell: "{{ sources_other }}/vim/src/configure --with-features=huge --enable-rubyinterp=yes "
-#
-#- name: run make in vim repo
-#  make:
-#    chdir: "{{ sources_other }}/vim/src"
-#
-#- name: make install vim
-#  make:
-#    chdir: "{{ sources_other }}/vim/src"
-#    target: install
-
