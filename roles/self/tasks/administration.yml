@@ -60,14 +60,6 @@
     group: "{{ self_user }}"
     state: link
 
-- name: create symlink for git config
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/gitconfig"
-    dest: "{{ user_home }}/.gitconfig"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
-
 - name: create symlink for emacs config
   ansible.builtin.file:
     src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
@@ -76,18 +68,15 @@
     group: "{{ self_user }}"
     state: link
 
-- name: create symlink for gitignore-system
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/gitignore-system"
-    dest: "{{ user_home }}/.gitignore-system"
+- name: create symlinks for config files
+  file:
+    src: "{{ sources_adm }}/bashrc-contents/{{ item }}"
+    dest: "{{ user_home }}/.{{ item }}"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link
-
-- name: create symlink for the dot-ackrc file
-  file: 
-    src: "{{ sources_adm }}/bashrc-contents/ackrc"
-    dest: "{{ user_home }}/.ackrc"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
+  loop:
+    - ackrc
+    - gitignore-system
+    - gitconfig
+    - ctags
