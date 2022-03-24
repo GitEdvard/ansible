@@ -38,37 +38,19 @@
     group: "{{ self_user }}"
     state: link
 
-- name: create symlink for bin_work
+- name: create symlink for bin directories
   ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/bin_work"
-    dest: "{{ user_home }}/bin/bin_work"
+    src: "{{ sources_adm }}/bashrc-contents/{{ item }}"
+    dest: "{{ user_home }}/bin/{{ item }}"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link
-
-- name: create symlink for bin_home
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/bin_home"
-    dest: "{{ user_home }}/bin/bin_home"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
-
-- name: create symlink for bin_sysman
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/bin_sysman"
-    dest: "{{ user_home }}/bin/bin_sysman"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
-
-- name: create symlink for bin_docker
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/bashrc-contents/bin_docker"
-    dest: "{{ user_home }}/bin/bin_docker"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
+  loop:
+    - bin_home
+    - bin_work
+    - bin_sysman
+    - bin_docker
+    - bin_miarka
 
 - name: create symlink for completion scripts
   ansible.builtin.file:
