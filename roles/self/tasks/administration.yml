@@ -25,6 +25,14 @@
     group: "{{ self_user }}"
     state: link
 
+- name: create symlink for emacs config
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
+    dest: "{{ user_home }}/.emacs"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
 - name: remove existing .profile file
   file:
     path: "{{ user_home }}/.profile"
@@ -56,14 +64,6 @@
   ansible.builtin.file:
     src: "{{ sources_adm }}/bashrc-contents/scripts"
     dest: "{{ user_home }}/scripts"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
-
-- name: create symlink for emacs config
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
-    dest: "{{ user_home }}/.emacs"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
     state: link
