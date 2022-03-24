@@ -12,6 +12,13 @@
     state: present
     path: '/home/linuxbrew/.linuxbrew/bin'
 
+- name: install ctags through homebrew
+  # requires: ansible-galaxy collection install community.general
+  community.general.homebrew:
+    name: ctags
+    state: present
+    path: '/home/linuxbrew/.linuxbrew/bin'
+
 - name: fetch vim from git
   git:
     repo: https://github.com/vim/vim.git
