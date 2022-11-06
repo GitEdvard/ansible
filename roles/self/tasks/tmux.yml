@@ -1,13 +1,5 @@
 ---
 
-- name: install tmux old installation
-  become: yes
-  apt:
-    name: tmux
-    state: present
-  when: false
-
-
 - name: install prerequisites for tmux (v3.2)
   become: yes
   ansible.builtin.apt:
@@ -21,20 +13,48 @@
     - bison
     - byacc
 
-- name: clone repository for tmux
-  git:
-    repo: https://github.com/tmux/tmux
-    dest: "{{ sources_other }}/tmux"
-    update: no
+- name: download package file
+  get_url:
+    url: "https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz"
+    dest: "/tmp"
 
-- name: run tmux configure
-  shell: "sh autogen.sh; ./configure"
+- name: unpack package
+  unarchive:
+    src: "/tmp/tmux-3.3a.tar.gz"
+    dest: "/tmp"
+
+- name: run configure
+  shell: "./configure"
   args:
-    chdir: "{{ sources_other }}/tmux"
+    chdir: "/tmp/tmux-3.3a"
 
-- name: make tmux
+- name: run make
   make:
-    chdir: "{{ sources_other }}/tmux"
+    chdir: "/tmp/tmux-3.3a"
+
+- name: run make install
+  make:
+    chdir: "/tmp/tmux-3.3a"
+    target: install
+  become: yes
+  become_user: root
+
+- name: move tmux executable to local bin folder
+  copy:
+    src: "/tmp/tmux-3.3a/tmux"
+    dest: "/home/{{ self_user }}/bin/tmux"
+    mode: '0744'
+
+- name: remove temp intallation folder
+  file:
+    path: "/tmp/tmux-3.3a"
+    state: absent
+
+- name: remove tar.gz file
+  file:
+    path: "/tmp/tmux-3.3a.tar.gz"
+    state: absent
+  tags: mytest
 
 - name: clone repository for tmux resurrect
   ansible.builtin.git:
