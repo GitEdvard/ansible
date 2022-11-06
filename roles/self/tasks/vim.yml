@@ -1,9 +1,9 @@
-- name: install nvim through homebrew
-  # requires: ansible-galaxy collection install community.general
-  community.general.homebrew:
-    name: nvim
-    state: present
-    path: '/home/linuxbrew/.linuxbrew/bin'
+# - name: install nvim through homebrew
+#   # requires: ansible-galaxy collection install community.general
+#   community.general.homebrew:
+#     name: nvim
+#     state: present
+#     path: '/home/linuxbrew/.linuxbrew/bin'
 
 - name: install ripgrep through homebrew
   # requires: ansible-galaxy collection install community.general
@@ -19,31 +19,27 @@
     state: present
     path: '/home/linuxbrew/.linuxbrew/bin'
 
-- name: fetch vim from git
-  git:
-    repo: https://github.com/vim/vim.git
-    dest: "{{ sources_other }}/vim"
-  tags: skip
-  when: false
-
-- name: Uninstall vim
-  apt:
-    name: vim
-    state: absent
-  when: false
-
-- name: install compiled vim with support for ruby, python etc.
-  become: true
-  apt:
-    name: vim-nox
-  tags: skip
-  when: false
-
-- name: fetch nvim executable
+- name: fetch nvim package file
   get_url:
-    url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-    dest: "/home/{{ self_user }}/bin/nvim"
-    mode: '0740'
+    url: "https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb"
+    dest: "/tmp/nvim-linux64.deb"
+
+- name: install the deb package
+  apt:
+    deb: "/tmp/nvim-linux64.deb"
+  become: yes
+  become_user: root
+
+- name: remove the deb package file
+  file:
+    path: "/tmp/nvim-linux64.deb"
+    state: absent
+
+# - name: fetch nvim executable
+#   get_url:
+#     url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+#     dest: "/home/{{ self_user }}/bin/nvim"
+#     mode: '0740'
 
 - name: Create config directory for nvim
   file:
