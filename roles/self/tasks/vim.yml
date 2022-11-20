@@ -41,10 +41,35 @@
 #     dest: "/home/{{ self_user }}/bin/nvim"
 #     mode: '0740'
 
+- name: clone VimFiles repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/VimFiles.git
+    dest: "{{ sources_adm }}/VimFiles"
+    update: no
+
+- name: create a symlink for the .vimrc file
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/VimFiles/vimrc"
+    dest: "{{ user_home }}/.vimrc"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    force: yes
+    state: link
+
+- name: create a symlink for the .vim directory
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/VimFiles"
+    dest: "{{ user_home }}/.vim"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
 - name: Create config directory for nvim
   file:
     path: "{{ self_user }}/.config/nvim"
     state: directory
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
 
 - name: Deploy init.vim file
   copy:
