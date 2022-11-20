@@ -66,7 +66,7 @@
 
 - name: Create config directory for nvim
   file:
-    path: "{{ self_user }}/.config/nvim"
+    path: "{{ user_home }}/.config/nvim"
     state: directory
     owner: "{{ self_user }}"
     group: "{{ self_user }}"
@@ -74,7 +74,7 @@
 - name: Deploy init.vim file
   copy:
     src: init.vim
-    dest: "{{ self_user }}/.config/nvim/init.vim"
+    dest: "{{ user_home }}/.config/nvim/init.vim"
 
 - name: Install pynvim for python 3 so that I can install python vim modules
   pip:
