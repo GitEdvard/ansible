@@ -1,0 +1,19 @@
+- name: disable bell sound in bash
+  lineinfile:
+    path: /etc/inputrc
+    regexp: # set bell-style none
+    line: set bell-style none
+  become: true
+  become_user: root
+
+- name: disable bell source in vim
+  lineinfile:
+    path: /home/edvard/.vimrc
+    line: set visualbell
+    create: yes
+
+- name: disbale bell in less
+  lineinfile:
+    path: /home/edvard/.profile
+    line: export LESS="$LESS -R -Q"
+

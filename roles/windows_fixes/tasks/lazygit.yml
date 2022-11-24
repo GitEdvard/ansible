@@ -1,0 +1,11 @@
+- name: fetch latest version number
+  shell: curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/'
+  register: latest_version
+
+- name: fetch lazygit tar archive
+  shell: 'curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_{{ latest_version.stdout }}_Linux_x86_64.tar.gz"'
+
+- name: pack it up
+  shell: tar xf lazygit.tar.gz -C /usr/local/bin lazygit
+  become: yes
+  become_user: root
