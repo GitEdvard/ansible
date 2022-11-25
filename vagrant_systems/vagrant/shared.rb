@@ -6,7 +6,7 @@ $shared_provision_script = <<SCRIPT
 echo "Running initial provisioning so Ansible can run"
 if command -v apt-get >/dev/null 2>&1; then
   if ! command -v python >/dev/null 2>&1; then
-    sudo apt-get -y install python
+    sudo apt-get -y install python3
   fi
 fi
 SCRIPT
