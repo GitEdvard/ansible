@@ -1,14 +1,42 @@
+- name: add key for mono-devel
+  shell: sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+  become: yes
+  become_user: root
+
+- name: add apt repo for mono-devel
+  shell: echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+  become: yes
+  become_user: root
+
 - name: Update apt packages
   become: true
   apt:
     update_cache: yes
-    cache_valid_time: 86400 #One day
 
 - name: install dotnet
   apt:
-    name:
-      - dotnet6
-      - aspnetcore-runtime-6.0
+    name: "{{ item }}"
     state: present
+  loop:
+    - dotnet6
+    - aspnetcore-runtime-6.0
+    - nuget
+    - gnupg
+    - ca-certificates
+    - mono-devel
+  become: yes
+  become_user: root
+
+- name: download repo for omnisharp-roslyn
+  git:
+    repo: https://github.com/OmniSharp/omnisharp-roslyn.git
+    dest: /home/edvard/sources/test/OmniSharp
+  become: yes
+  become_user: root
+
+- name: run build script for omnisharp-roslyn
+  shell: /home/edvard/sources/test/OmniSharp/build.sh
+  args:
+    chdir: /home/edvard/sources/test/OmniSharp
   become: yes
   become_user: root
