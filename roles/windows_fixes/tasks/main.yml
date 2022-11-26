@@ -1,5 +1,5 @@
-- import_tasks: disable_bells.yml
-  tags: disable-bells
+- import_tasks: python.yml
+  tags: python
 
 - import_tasks: lazygit.yml
   tags: lazygit
