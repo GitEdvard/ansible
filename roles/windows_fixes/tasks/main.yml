@@ -3,3 +3,9 @@
 
 - import_tasks: lazygit.yml
   tags: lazygit
+
+- import_tasks: csharp.yml
+  tags: csharp
+
+- import_tasks: disable_bells.yml
+  tags: disable-bells
