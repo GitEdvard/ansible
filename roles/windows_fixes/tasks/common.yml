@@ -1,0 +1,7 @@
+- name: install some common packages
+  apt:
+    name:
+      - tree
+    state: present
+  become: true
+  become_user: root
