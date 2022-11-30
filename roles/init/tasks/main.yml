@@ -29,3 +29,22 @@
     - ack
     - python-pip
     - python3-pip
+
+- name: install emacs
+  become: true
+  apt:
+    name: emacs
+    state: present
+
+- name: download fzf git repo
+  ansible.builtin.git:
+    repo: https://github.com/junegunn/fzf.git
+    depth: 1
+    dest: "{{ self_user }}/.fzf"
+    update: no
+  tags: fzf
+
+- name: install fzf
+  command: "{{ self_user }}/.fzf/install --all"
+  tags: fzf
+
