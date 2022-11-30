@@ -1,0 +1,23 @@
+- name: Remove previous downloaded installfile (idempotence)
+  file:
+    path: /tmp/homebrew_install.sh
+    state: absent
+
+- name: download homebrew
+  get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    dest: /tmp/homebrew_install.sh
+    mode: '0750'
+
+- name: Install homebrew
+  command: /tmp/homebrew_install.sh
+
+- name: Activate homebrew without restarting
+  shell: /home/linuxbrew/.linuxbrew/bin/brew shellenv
+
+- name: Add brew into global PATH environment variable
+  become: true
+  copy:
+    dest: /etc/profile.d/brew_path.sh
+    content: 'PATH=$PATH:/home/linuxbrew/.linuxbrew/bin'
+
