@@ -17,4 +17,5 @@
   gather_facts: false
   roles:
     - { role: init }
+    - { role: vim }
     - { role: self }

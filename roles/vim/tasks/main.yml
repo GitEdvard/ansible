@@ -1,0 +1,78 @@
+- name: fetch nvim package file
+  get_url:
+    url: "https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb"
+    dest: "/tmp/nvim-linux64.deb"
+
+- name: install the deb package
+  apt:
+    deb: "/tmp/nvim-linux64.deb"
+  become: yes
+  become_user: root
+
+- name: remove the deb package file
+  file:
+    path: "/tmp/nvim-linux64.deb"
+    state: absent
+
+# - name: fetch nvim executable
+#   get_url:
+#     url: https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+#     dest: "/home/{{ self_user }}/bin/nvim"
+#     mode: '0740'
+
+- name: clone VimFiles repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/VimFiles.git
+    dest: "{{ sources_adm }}/VimFiles"
+    update: no
+
+- name: create a symlink for the .vimrc file
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/VimFiles/vimrc"
+    dest: "{{ user_home }}/.vimrc"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    force: yes
+    state: link
+
+- name: create a symlink for the .vim directory
+  ansible.builtin.file:
+    src: "{{ sources_adm }}/VimFiles"
+    dest: "{{ user_home }}/.vim"
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+    state: link
+
+- name: Create config directory for nvim
+  file:
+    path: "{{ user_home }}/.config/nvim"
+    state: directory
+    owner: "{{ self_user }}"
+    group: "{{ self_user }}"
+
+- name: Deploy init.vim file
+  copy:
+    src: init.vim
+    dest: "{{ user_home }}/.config/nvim/init.vim"
+
+- name: Install pynvim for python 3 so that I can install python vim modules
+  pip:
+    name: pynvim
+    extra_args: "--user --upgrade"
+    executable: pip3
+
+- name: Install pynvim for python 2
+  pip:
+    name: pynvim
+    extra_args: "--user --upgrade"
+    executable: pip
+
+- name: Fetch Jeremy Kahns dotfiles repo
+  git:
+    repo: https://github.com/jeremyckahn/dotfiles.git
+    dest: "{{ sources_test }}/dotfiles"
+
+- name: Fetch Jeremy Kahns vim-docker-env repo
+  git:
+    repo: https://github.com/jeremyckahn/vim-docker-env.git
+    dest: "{{ sources_test }}/vim-docker-env"
