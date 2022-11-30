@@ -16,4 +16,5 @@
 - hosts: self
   gather_facts: false
   roles:
+    - { role: init }
     - { role: windows_fixes }

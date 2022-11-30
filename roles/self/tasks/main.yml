@@ -8,9 +8,6 @@
   debug:
     msg: user_home "{{ user_home }}"
 
-- import_tasks: init.yml
-  tags: init
-
 - import_tasks: homebrew.yml
   tags: homebrew
 
