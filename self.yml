@@ -18,4 +18,5 @@
   roles:
     - { role: init }
     - { role: vim }
+    - { role: tmux }
     - { role: self }
