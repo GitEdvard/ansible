@@ -2,6 +2,22 @@
   apt:
     name:
       - tree
+      - unzip
     state: present
   become: true
   become_user: root
+
+- name: fetch latest version info for win32yank
+  shell: curl -s "https://api.github.com/repos/equalsraf/win32yank/releases/latest" | grep "tag_name"
+  register: json_row
+
+- name: extract version for win32yank
+  set_fact:
+    win32yank_version: "{{ json_row.stdout | regex_search('.*?(v[0-9.]+)', '\\1') | first }}"
+
+- name: download and unzip win32yank
+  unarchive:
+    src: "https://github.com/equalsraf/win32yank/releases/download/{{ win32yank_version }}/win32yank-x64.zip"
+    dest: /home/edvard/bin
+    mode: '0744'
+    remote_src: yes
