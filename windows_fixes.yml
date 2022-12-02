@@ -20,3 +20,4 @@
     - { role: vim }
     - { role: tmux }
     - { role: windows_fixes }
+    - { role: administration }
