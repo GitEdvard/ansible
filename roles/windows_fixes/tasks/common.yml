@@ -1,8 +1,12 @@
+# You might have to rename the existing ctags executable at /usr/bin/ctags
 - name: install some common packages
   apt:
     name:
       - tree
       - unzip
+      - xdg-utils
+      - rpm
+      - exuberant-ctags
     state: present
   become: true
   become_user: root
