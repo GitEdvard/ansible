@@ -16,8 +16,11 @@
 - hosts: self
   gather_facts: false
   roles:
-    - { role: init }
-    - { role: vim }
-    - { role: tmux }
-    - { role: windows_fixes }
-    - { role: administration }
+    - role: init
+    - role: vim
+      vars:
+        vim_root_branch_name: "wsl"
+      tags: vim
+    - role: tmux
+    - role: windows_fixes
+    - role: administration

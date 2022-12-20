@@ -26,9 +26,16 @@
     dest: "{{ sources_adm }}/VimFiles"
     update: no
 
+- name: clone VimRoot repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/VimRoot.git
+    dest: "{{ sources_adm }}/VimRoot"
+    version: "{{ vim_root_branch_name }}"
+    update: no
+
 - name: create a symlink for the .vimrc file
   ansible.builtin.file:
-    src: "{{ sources_adm }}/VimFiles/vimrc"
+    src: "{{ sources_adm }}/VimRoot/vimrc"
     dest: "{{ user_home }}/.vimrc"
     owner: "{{ self_user }}"
     group: "{{ self_user }}"

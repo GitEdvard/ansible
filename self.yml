@@ -16,8 +16,11 @@
 - hosts: self
   gather_facts: false
   roles:
-    - { role: init }
-    - { role: vim }
-    - { role: tmux }
-    - { role: self }
-    - { role: administration }
+    - role: init
+    - role: vim
+      vars:
+        vim_root_branch_name: "linux"
+      tags: vim
+    - role: tmux
+    - role: self
+    - role: administration
