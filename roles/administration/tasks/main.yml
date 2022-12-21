@@ -10,6 +10,7 @@
   ansible.builtin.git:
     repo: git@github.com:GitEdvard/linux-settings.git
     dest: "{{ sources_adm }}/linux-settings"
+    version: "{{ linux_settings_branch }}"
     update: no
 
 - name: remove existing .bashrc file

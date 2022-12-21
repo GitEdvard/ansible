@@ -24,3 +24,5 @@
     - role: tmux
     - role: self
     - role: administration
+      vars:
+        linux_settings_branch: "linux"
