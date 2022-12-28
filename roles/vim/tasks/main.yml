@@ -6,6 +6,7 @@
 - name: install the deb package
   apt:
     deb: "/tmp/nvim-linux64.deb"
+    force: yes
   become: yes
   become_user: root
 
@@ -20,6 +21,12 @@
 #     dest: "/home/{{ self_user }}/bin/nvim"
 #     mode: '0740'
 
+- name: create personal plugin directory
+  file:
+    path: "{{ sources_adm }}/VimPlugins"
+    state: directory
+    mode: '0755'
+
 - name: clone VimFiles repository
   ansible.builtin.git:
     repo: git@github.com:GitEdvard/VimFiles.git
@@ -31,6 +38,13 @@
     repo: git@github.com:GitEdvard/VimRoot.git
     dest: "{{ sources_adm }}/VimRoot"
     version: "{{ vim_root_branch_name }}"
+    update: no
+
+- name: clone test-on-save.nvim repository
+  ansible.builtin.git:
+    repo: git@github.com:GitEdvard/test-on-save.nvim.git
+    dest: "{{ sources_adm }}/VimPlugins/test-on-save.nvim"
+    version: "develop"
     update: no
 
 - name: create a symlink for the .vimrc file
