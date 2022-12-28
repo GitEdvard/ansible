@@ -88,6 +88,13 @@
     extra_args: "--user --upgrade"
     executable: pip
 
+- name: Install pyright language server
+  community.general.npm:
+    name: pyright
+    global: true
+  become: yes
+  become_user: root
+
 - name: Fetch Jeremy Kahns dotfiles repo
   git:
     repo: https://github.com/jeremyckahn/dotfiles.git
