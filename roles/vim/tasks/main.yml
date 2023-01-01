@@ -104,3 +104,5 @@
   git:
     repo: https://github.com/jeremyckahn/vim-docker-env.git
     dest: "{{ sources_test }}/vim-docker-env"
+
+- import_tasks: virtualenvs.yml

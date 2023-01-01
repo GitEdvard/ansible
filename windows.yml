@@ -17,12 +17,12 @@
   gather_facts: false
   roles:
     - role: init
+    - role: windows_fixes
     - role: vim
       vars:
         vim_root_branch_name: "wsl"
       tags: vim
     - role: tmux
-    - role: windows_fixes
     - role: administration
       vars:
         linux_settings_branch: "windows"

@@ -1,0 +1,23 @@
+- name: create directory for .virtualenvs
+  file:
+    path: "{{ user_home }}/.virtualenvs"
+    state: directory
+
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    executable: pip3
+  become: yes
+  become_user: root
+
+- name: install debugpy in dedicated virtualenv
+  pip:
+    name: debugpy
+    virtualenv: "{{ user_home }}/.virtualenvs/debugpy"
+    virtualenv_python: python3
+
+- name: install pynvim in dedicated virtualenv
+  pip:
+    name: pynvim
+    virtualenv: "{{ user_home }}/.virtualenvs/pynvim"
+    virtualenv_python: python3
