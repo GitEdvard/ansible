@@ -81,4 +81,5 @@
     - gitignore-system
     - gitconfig
     - ctags
+    - pylintrc
 
