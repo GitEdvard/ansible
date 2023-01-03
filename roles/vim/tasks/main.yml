@@ -95,6 +95,13 @@
   become: yes
   become_user: root
 
+- name: install pylint
+  apt:
+    name: pylint
+    state: present
+  become: yes
+  become_user: root
+
 - name: Fetch Jeremy Kahns dotfiles repo
   git:
     repo: https://github.com/jeremyckahn/dotfiles.git
