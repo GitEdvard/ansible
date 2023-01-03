@@ -27,25 +27,25 @@
     state: directory
     mode: '0755'
 
-- name: clone VimFiles repository
-  ansible.builtin.git:
-    repo: git@github.com:GitEdvard/VimFiles.git
-    dest: "{{ sources_adm }}/VimFiles"
+- name: clone vim related repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version }}"
     update: no
-
-- name: clone VimRoot repository
-  ansible.builtin.git:
-    repo: git@github.com:GitEdvard/VimRoot.git
-    dest: "{{ sources_adm }}/VimRoot"
-    version: "{{ vim_root_branch_name }}"
-    update: no
-
-- name: clone test-on-save.nvim repository
-  ansible.builtin.git:
-    repo: git@github.com:GitEdvard/test-on-save.nvim.git
-    dest: "{{ sources_adm }}/VimPlugins/test-on-save.nvim"
-    version: "develop"
-    update: no
+  loop:
+    - repo: 'git@github.com:GitEdvard/VimFiles.git'
+      dest: "{{ sources_adm }}/VimFiles"
+      version: 'develop'
+    - repo: 'git@github.com:GitEdvard/VimRoot.git'
+      dest: "{{ sources_adm }}/VimRoot"
+      version: "{{ vim_root_branch_name }}"
+    - repo: 'git@github.com:GitEdvard/test-on-save.nvim.git'
+      dest: "{{ sources_adm }}/VimPlugins/test-on-save.nvim"
+      version: 'develop'
+    - repo: 'git@github.com:GitEdvard/read-settings.nvim.git'
+      dest: "{{ sources_adm }}/VimPlugins/read-settings.nvim"
+      version: 'develop'
 
 - name: create a symlink for the .vimrc file
   ansible.builtin.file:
