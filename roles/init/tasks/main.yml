@@ -30,8 +30,9 @@
     - libncurses-dev
     - git
     - ack
-    - python-pip
     - python3-pip
+    - npm
+    - nodejs
 
 - name: install emacs
   become: true

@@ -7,8 +7,6 @@
       - xdg-utils
       - rpm
       - exuberant-ctags
-      - npm
-      - nodejs
     state: present
   become: true
   become_user: root
