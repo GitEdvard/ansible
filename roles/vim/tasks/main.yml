@@ -46,6 +46,9 @@
     - repo: 'git@github.com:GitEdvard/read-settings.nvim.git'
       dest: "{{ sources_adm }}/VimPlugins/read-settings.nvim"
       version: 'develop'
+    - repo: 'git@github.com:GitEdvard/trigger-commands.nvim.git'
+      dest: "{{ sources_adm }}/VimPlugins/read-settings.nvim"
+      version: 'develop'
 
 - name: create a symlink for the .vimrc file
   ansible.builtin.file:
