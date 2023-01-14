@@ -47,7 +47,7 @@
       dest: "{{ sources_adm }}/VimPlugins/read-settings.nvim"
       version: 'develop'
     - repo: 'git@github.com:GitEdvard/trigger-commands.nvim.git'
-      dest: "{{ sources_adm }}/VimPlugins/read-settings.nvim"
+      dest: "{{ sources_adm }}/VimPlugins/trigger-commands.nvim"
       version: 'develop'
 
 - name: create a symlink for the .vimrc file
