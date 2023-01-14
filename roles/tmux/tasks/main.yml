@@ -67,7 +67,8 @@
   ansible.builtin.git:
     repo: git@github.com:GitEdvard/tmux_settings.git
     dest: "{{ sources_adm }}/tmux_settings"
-    update: no
+    version: "{{ os_branch_name }}"
+    update: yes
 
 - name: create a symlink for tmux settings
   ansible.builtin.file:

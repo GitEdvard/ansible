@@ -15,14 +15,12 @@
 # (old way) - hosts: 127.0.0.1
 - hosts: self
   gather_facts: false
+  vars:
+    os_branch_name: "linux"
   roles:
     - role: init
     - role: vim
-      vars:
-        vim_root_branch_name: "linux"
       tags: vim
     - role: tmux
     - role: self
     - role: administration
-      vars:
-        linux_settings_branch: "linux"

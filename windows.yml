@@ -15,15 +15,13 @@
 # (old way) - hosts: 127.0.0.1
 - hosts: self
   gather_facts: false
+  vars:
+    os_branch_name: "wsl"
   roles:
     - role: init
     - role: windows_fixes
     - role: vim
-      vars:
-        vim_root_branch_name: "wsl"
       tags: vim
     - role: tmux
       tags: tmux
     - role: administration
-      vars:
-        linux_settings_branch: "windows"

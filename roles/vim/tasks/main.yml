@@ -39,7 +39,7 @@
       version: 'develop'
     - repo: 'git@github.com:GitEdvard/VimRoot.git'
       dest: "{{ sources_adm }}/VimRoot"
-      version: "{{ vim_root_branch_name }}"
+      version: "{{ os_branch_name }}"
     - repo: 'git@github.com:GitEdvard/test-on-save.nvim.git'
       dest: "{{ sources_adm }}/VimPlugins/test-on-save.nvim"
       version: 'develop'
