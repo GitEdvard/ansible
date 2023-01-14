@@ -12,6 +12,7 @@
     - pkg-config
     - bison
     - byacc
+    - xclip
 
 - name: download package file
   get_url:

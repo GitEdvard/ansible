@@ -1,17 +1,17 @@
 ---
-
-- name: clone bashrc contents repository
+- name: clone personal git repos
   ansible.builtin.git:
-    repo: git@github.com:GitEdvard/bashrc-contents.git
-    dest: "{{ sources_adm }}/bashrc-contents"
-    update: no
-
-- name: clone linux settings repository
-  ansible.builtin.git:
-    repo: git@github.com:GitEdvard/linux-settings.git
-    dest: "{{ sources_adm }}/linux-settings"
-    version: "{{ linux_settings_branch }}"
-    update: no
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version }}"
+    update: yes
+  loop:
+    - repo: git@github.com:GitEdvard/bashrc-contents.git
+      dest: "{{ sources_adm }}/bashrc-contents"
+      version: "develop"
+    - repo: git@github.com:GitEdvard/linux-settings.git
+      dest: "{{ sources_adm }}/linux-settings"
+      version: "{{ linux_settings_branch }}"
 
 - name: remove existing .bashrc file
   ansible.builtin.file:

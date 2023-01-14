@@ -32,7 +32,7 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
     version: "{{ item.version }}"
-    update: no
+    update: yes
   loop:
     - repo: 'git@github.com:GitEdvard/VimFiles.git'
       dest: "{{ sources_adm }}/VimFiles"
