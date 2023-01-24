@@ -9,6 +9,8 @@
   apt:
     name: software-properties-common
     state: present
+  become: true
+  become_user: root
 
 - name: add repository for python3.8
   expect:
@@ -22,6 +24,8 @@
   apt:
     name: python3.8
     state: present
+  become: true
+  become_user: root
 
 - name: create softlink for python
   file:
