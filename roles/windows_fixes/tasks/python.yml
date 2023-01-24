@@ -5,6 +5,12 @@
     update_cache: yes
     cache_valid_time: 86400 #One day
 
+- name: install pexpect
+  pip:
+    name: pexpect
+  become: true
+  become_user: root
+
 - name: install software properties common
   apt:
     name: software-properties-common
