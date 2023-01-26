@@ -1,0 +1,22 @@
+- name: create directory for dev projects
+  file:
+    path: "{{ sources_dev }}"
+    state: directory
+    mode: '0755'
+
+- name: clone personal dev repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    version: "{{ item.version }}"
+    update: yes
+  loop:
+    - repo: 'git@github.com:GitEdvard/stock-winners.git'
+      dest: "{{ sources_dev }}/stock-winners"
+      version: 'master'
+    - repo: 'git@github.com:GitEdvard/csharp_test.git'
+      dest: "{{ sources_dev }}/csharp_test"
+      version: "develop"
+    - repo: 'git@github.com:GitEdvard/fsharp-playground.git'
+      dest: "{{ sources_dev }}/fsharp-playground"
+      version: "develop"

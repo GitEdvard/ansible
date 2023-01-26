@@ -6,6 +6,7 @@
 # 3. trigger sudo by e.g. "sudo ls"
 # 4. run with
 # ansible-playbook -i /home/edvard/sources/admin/ansible/inventories/local_inventory windows.yml
+# fast command: play-wsl.sh <params>
 #   local-inventory is configured to run on self!
 # (old way) ansible-playbook --connection=local --inventory=127.0.0.1, --limit 127.0.0.1 self.yml
 
