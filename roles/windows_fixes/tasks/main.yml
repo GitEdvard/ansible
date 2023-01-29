@@ -18,6 +18,3 @@
 
 - import_tasks: dev_env.yml
   tags: dev-env
-
-- import_tasks: angular.yml
-  tags: angular

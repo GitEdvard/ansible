@@ -18,8 +18,8 @@
     name: "{{ item }}"
     state: present
   loop:
-    - dotnet6
-    - aspnetcore-runtime-6.0
+    - dotnet-sdk-7.0
+    - aspnetcore-runtime-7.0
     - nuget
     # - gnupg
     # - ca-certificates
