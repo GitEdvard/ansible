@@ -105,6 +105,18 @@
   become: yes
   become_user: root
 
+- name: install packages
+  shell: nvim --headless +PlugInstall +qall
+
+- name: fix telescope-fzf, make clean
+  make:
+    chdir: "{{ sources_adm }}/VimFiles/plugged/telescope-fzf-native.nvim"
+    target: clean
+
+- name: fix telescope-fzf, make
+  make:
+    chdir: "{{ sources_adm }}/VimFiles/plugged/telescope-fzf-native.nvim"
+
 - name: Fetch Jeremy Kahns dotfiles repo
   git:
     repo: https://github.com/jeremyckahn/dotfiles.git
