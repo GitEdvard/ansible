@@ -16,6 +16,9 @@
 - import_tasks: omnisharp.yml
   tags: omnisharp
 
+- import_tasks: netcoredbg.yml
+  tags: netcoredgb
+
 - import_tasks: disable_bells.yml
   tags: disable-bells
 

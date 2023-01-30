@@ -1,0 +1,15 @@
+- name: download netcoredbg
+  get_url:
+    url: https://github.com//Samsung/netcoredbg/releases/download/2.2.0-961/netcoredbg-linux-amd64.tar.gz
+    dest: /tmp
+
+- name: unpack netcoredb
+  unarchive:
+    src: /tmp/netcoredbg-linux-amd64.tar.gz
+    dest: /home/edvard/.cache
+    remote_src: yes
+
+- name: remove tar file
+  file:
+    path: /tmp/netcoredbg-linux-amd64.tar.gz
+    state: absent
