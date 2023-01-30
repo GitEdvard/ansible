@@ -1,0 +1,20 @@
+- name: create directory for omnisharp-roslyn
+  file:
+    path: /home/edvard/.cache/omnisharp
+    state: directory
+
+- name: download omnisharp-roslyn
+  get_url:
+    url: https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.4/omnisharp-linux-x64-net6.0.tar.gz
+    dest: /tmp
+
+- name: install omnisharp-roslyn
+  unarchive:
+    src: /tmp/omnisharp-linux-x64-net6.0.tar.gz
+    dest: /home/edvard/.cache/omnisharp
+    remote_src: yes
+
+- name: remove downloaded file
+  file:
+    path: /tmp/omnisharp-linux-x64-net6.0.tar.gz
+    state: absent

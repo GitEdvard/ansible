@@ -13,6 +13,9 @@
 - import_tasks: csharp.yml
   tags: csharp
 
+- import_tasks: omnisharp.yml
+  tags: omnisharp
+
 - import_tasks: disable_bells.yml
   tags: disable-bells
 
