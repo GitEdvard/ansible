@@ -35,10 +35,10 @@
   loop:
     - dotnet-sdk-7.0
     - aspnetcore-runtime-7.0
+    - dotnet-sdk-6.0
+    - aspnetcore-runtime-6.0
+    - dotnet-runtime-6.0
     - nuget
-    # - gnupg
-    # - ca-certificates
-    # - mono-devel
   become: yes
   become_user: root
 
