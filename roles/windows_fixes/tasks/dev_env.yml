@@ -20,3 +20,6 @@
     - repo: 'git@github.com:GitEdvard/fsharp-playground.git'
       dest: "{{ sources_dev }}/fsharp-playground"
       version: "develop"
+    - repo: 'git@github.com:GitEdvard/angular-playground.git'
+      dest: "{{ sources_dev }}/angular-playground"
+      version: "master"
