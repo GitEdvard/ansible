@@ -9,3 +9,8 @@
   shell: tar xf lazygit.tar.gz -C /usr/local/bin lazygit
   become: yes
   become_user: root
+
+- name: remove tar.gz file
+  file:
+    path: lazygit.tar.gz
+    state: absent
