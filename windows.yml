@@ -19,6 +19,7 @@
   vars:
     os_branch_name: "wsl"
   roles:
+    - role: administration
     - role: init
     - role: windows_fixes
     - role: vim
@@ -27,4 +28,3 @@
       tags: tmux
     - role: java
       tags: java
-    - role: administration

@@ -18,6 +18,7 @@
   vars:
     os_branch_name: "linux"
   roles:
+    - role: administration
     - role: init
     - role: vim
       tags: vim
@@ -25,4 +26,3 @@
     - role: self
     - role: java
       tags: java
-    - role: administration
