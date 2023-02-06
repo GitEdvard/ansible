@@ -1,0 +1,61 @@
+- name: download and unzip java-sdk
+  unarchive:
+    src: "https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz"
+    dest: /home/edvard/bin
+    mode: '0744'
+    remote_src: yes
+
+- name: Update path to include java
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: '^export PATH="$PATH:/home/edvard/bin/jdk-17.0.6/bin"'
+    line: 'export PATH="$PATH:/home/edvard/bin/jdk-17.0.6/bin"'
+
+- name: Define java_home
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: '^export JAVA_HOME="/home/edvard/bin/jdk-17.0.6/"'
+    line: 'export JAVA_HOME="/home/edvard/bin/jdk-17.0.6/"'
+
+- name: remove the tar.gz file
+  file:
+    path: "{{ user_home }}/bin/jdk-17_linux-x64_bin.tar.gz"
+    state: absent
+
+- name: create directory for java language server
+  file:
+    path: "{{ user_home }}/bin/jdt-language-server-latest"
+    state: directory
+
+- name: download and unpack java language server
+  unarchive:
+    src: "https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz"
+    dest: /home/edvard/bin/jdt-language-server-latest
+    mode: '0744'
+    remote_src: yes
+
+- name: update path to include the java language server
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: ^export PATH="$PATH:~/bin/jdt-language-server-latest/bin"
+    line: 'export PATH="$PATH:~/bin/jdt-language-server-latest/bin"'
+
+- name: download and unzip maven
+  unarchive:
+    src: "https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz"
+    dest: /home/edvard/bin
+    mode: '0744'
+    remote_src: yes
+
+- name: Update path to include maven
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: '^export PATH="$PATH:/home/edvard/bin/apache-maven-3.9.0/bin"'
+    line: 'export PATH="$PATH:/home/edvard/bin/apache-maven-3.9.0/bin"'
+
+- name: Define maven_home
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: '^export MAVEN_HOME="/home/edvard/bin/apache-maven-3.9.0"'
+    line: 'export MAVEN_HOME="/home/edvard/bin/apache-maven-3.9.0"'
+
