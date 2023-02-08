@@ -19,6 +19,9 @@
 - import_tasks: netcoredbg.yml
   tags: netcoredgb
 
+- import_tasks: java_debug.yml
+  tags: java_debug
+
 - import_tasks: disable_bells.yml
   tags: disable-bells
 

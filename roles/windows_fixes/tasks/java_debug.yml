@@ -1,0 +1,26 @@
+# https://mvnrepository.com/artifact/com.microsoft.java/com.microsoft.java.debug.plugin
+- name: fetch java_debug jar bundle
+  get_url:
+    url: "https://repo1.maven.org/maven2/com/microsoft/java/com.microsoft.java.debug.plugin/0.44.0/com.microsoft.java.debug.plugin-0.44.0.jar"
+    dest: "/home/edvard/.cache/nvim"
+
+- name: create directory for vscode-java-test plugin
+  file:
+    path: "{{ user_home }}/.cache/nvim/vscode-java-test"
+    state: directory
+
+- name: fetch vscode-java-test plugin
+  git:
+    repo: "git@github.com:microsoft/vscode-java-test.git"
+    dest: "/home/edvard/.cache/nvim/vscode-java-test"
+    version: "main"
+
+- name: install with npm
+  shell:
+    cmd: "npm install"
+    chdir: "{{ user_home }}/.cache/nvim/vscode-java-test" 
+
+- name: install with npm second phase
+  shell:
+    cmd: "npm run build-plugin"
+    chdir: "{{ user_home }}/.cache/nvim/vscode-java-test" 
