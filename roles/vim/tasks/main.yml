@@ -1,6 +1,6 @@
 - name: fetch nvim package file
   get_url:
-    url: "https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.deb"
+    url: "https://github.com/neovim/neovim/releases/download/v0.8.3/nvim-linux64.deb"
     dest: "/tmp/nvim-linux64.deb"
 
 - name: install the deb package
