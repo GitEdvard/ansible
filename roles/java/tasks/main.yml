@@ -1,25 +1,37 @@
-- name: download and unzip java-sdk
+- name: download and unzip java-sdk 17
   unarchive:
     src: "https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz"
     dest: /home/edvard/bin
     mode: '0744'
     remote_src: yes
 
-- name: Update path to include java
+- name: download and unzip java-sdk 19
+  unarchive:
+    src: "https://download.oracle.com/java/19/archive/jdk-19.0.2_linux-x64_bin.tar.gz"
+    dest: /home/edvard/bin
+    mode: '0744'
+    remote_src: yes
+
+- name: Update path to include java 19
   lineinfile:
     path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
-    regexp: '^export PATH="$PATH:/home/edvard/bin/jdk-17.0.6/bin"'
-    line: 'export PATH="$PATH:/home/edvard/bin/jdk-17.0.6/bin"'
+    regexp: '^export PATH="$PATH:/home/edvard/bin/jdk-19.0.2/bin"'
+    line: 'export PATH="$PATH:/home/edvard/bin/jdk-19.0.2/bin"'
 
-- name: Define java_home
+- name: Define java_home for java 19
   lineinfile:
     path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
-    regexp: '^export JAVA_HOME="/home/edvard/bin/jdk-17.0.6/"'
-    line: 'export JAVA_HOME="/home/edvard/bin/jdk-17.0.6/"'
+    regexp: '^export JAVA_HOME="/home/edvard/bin/jdk-19.0.2/"'
+    line: 'export JAVA_HOME="/home/edvard/bin/jdk-19.0.2/"'
 
-- name: remove the tar.gz file
+- name: remove the tar.gz file for 17
   file:
     path: "{{ user_home }}/bin/jdk-17_linux-x64_bin.tar.gz"
+    state: absent
+
+- name: remove the tar.gz file for 19
+  file:
+    path: "{{ user_home }}/bin/jdk-19_linux-x64_bin.tar.gz"
     state: absent
 
 - name: create directory for java language server
