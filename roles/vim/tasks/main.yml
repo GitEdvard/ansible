@@ -49,6 +49,7 @@
     - repo: 'git@github.com:GitEdvard/trigger-commands.nvim.git'
       dest: "{{ sources_adm }}/VimPlugins/trigger-commands.nvim"
       version: 'develop'
+  tags: update
 
 - name: create a symlink for the .vimrc file
   ansible.builtin.file:
