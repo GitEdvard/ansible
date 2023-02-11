@@ -15,13 +15,13 @@
 - name: Update path to include java 19
   lineinfile:
     path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
-    regexp: '^export PATH="$PATH:/home/edvard/bin/jdk-19.0.2/bin"'
-    line: 'export PATH="$PATH:/home/edvard/bin/jdk-19.0.2/bin"'
+    regexp: '^export PATH="/home/edvard/bin/jdk"'
+    line: 'export PATH="/home/edvard/bin/jdk-19.0.2/bin:$PATH"'
 
 - name: Define java_home for java 19
   lineinfile:
     path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
-    regexp: '^export JAVA_HOME="/home/edvard/bin/jdk-19.0.2/"'
+    regexp: '^export JAVA_HOME'
     line: 'export JAVA_HOME="/home/edvard/bin/jdk-19.0.2/"'
 
 - name: remove the tar.gz file for 17
@@ -71,3 +71,17 @@
     regexp: '^export MAVEN_HOME="/home/edvard/bin/apache-maven-3.9.0"'
     line: 'export MAVEN_HOME="/home/edvard/bin/apache-maven-3.9.0"'
 
+- name: download and unzip tomcat
+  unarchive:
+    src: "https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz"
+    dest: "{{ user_home }}/bin"
+    mode: '0744'
+    remote_src: yes
+  tags: tomcat
+
+- name: Update path to include tomcat
+  lineinfile:
+    path: "{{ user_home }}/sources/admin/bashrc-contents/common-exports"
+    regexp: '^export PATH="/home/edvard/bin/apache-tomcat"'
+    line: 'export PATH="$PATH:/home/edvard/bin/apache-tomcat-10.0.27/bin"'
+  tags: tomcat

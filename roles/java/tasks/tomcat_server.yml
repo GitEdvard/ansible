@@ -1,0 +1,67 @@
+- name: create directory for tomcat
+  file:
+    path: /opt/tomcat
+    state: directory
+  become: true
+  become_user: root
+
+- name: install default jdk
+  apt:
+    name: default-jdk
+  become: true
+  become_user: root
+
+- name: download and unzip tomcat
+  unarchive:
+    src: "https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz"
+    dest: /opt/tomcat
+    mode: '0744'
+    remote_src: yes
+  become: true
+  become_user: root
+
+- name: add group for tomcat
+  shell: groupadd tomcat
+  become: true
+  become_user: root
+
+- name: create user for tomcat
+  user:
+    name: tomcat
+    group: tomcat
+    create_home: yes
+    home: /opt/tomcat/apache-tomcat-10.0.27
+    state: present
+  become: true
+  become_user: root
+
+- name: grant tomcat user ownership of tomcat installation directory
+  shell: "chown -RH tomcat: /opt/tomcat/apache-tomcat-10.0.27"
+  become: true
+  become_user: root
+
+- name: add script permissions to tomcat user
+  shell: sh -c 'chmod +x /opt/tomcat/apache-tomcat-10.0.27/bin/*.sh'
+  become: true
+  become_user: root
+
+- name: deploy tomcat service unit file
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+    owner: tomcat
+    group: tomcat
+    mode: '0644'
+  vars:
+    java_home: "/usr/lib/jvm/java-1.11.0-openjdk-amd64"
+  become: true
+  become_user: root
+
+# https://askubuntu.com/questions/1379425/system-has-not-been-booted-with-systemd-as-init-system-pid-1-cant-operate
+- name: restart services
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: tomcat
+  become: true
+  become_user: root
