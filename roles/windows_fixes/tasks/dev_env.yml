@@ -23,3 +23,7 @@
     - repo: 'git@github.com:GitEdvard/angular-playground.git'
       dest: "{{ sources_dev }}/angular-playground"
       version: "master"
+    - repo: 'git@github.com:GitEdvard/java-spring-playground.git'
+      dest: "{{ sources_dev }}/java-spring-playground"
+      version: "develop"
+  tags: update
