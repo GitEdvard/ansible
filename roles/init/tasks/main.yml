@@ -8,12 +8,6 @@
     - "{{ sources_adm }}"
     - "{{ sources_test }}"
 
-- name: ensure that there is a bin directory
-  ansible.builtin.file:
-    path: "{{ user_home }}/bin"
-    mode: "0755"
-    state: directory
-
 - name: Update apt packages
   become: true
   apt:
@@ -31,7 +25,6 @@
     - git
     - ack
     - python3-pip
-    - python3.8-venv
     - python3.10-venv
     - npm
     - nodejs

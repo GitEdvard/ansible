@@ -76,3 +76,6 @@
     regexp: '^export PATH="/home/edvard/bin/apache-tomcat"'
     line: 'export PATH="$PATH:/home/edvard/bin/apache-tomcat-10.0.27/bin"'
   tags: tomcat
+
+- import_tasks: java_debug.yml
+  tags: java-debug
