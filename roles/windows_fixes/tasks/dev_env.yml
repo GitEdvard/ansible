@@ -26,4 +26,7 @@
     - repo: 'git@github.com:GitEdvard/java-spring-playground.git'
       dest: "{{ sources_dev }}/java-spring-playground"
       version: "develop"
+    - repo: 'git@github.com:GitEdvard/java-playground.git'
+      dest: "{{ sources_dev }}/java-playground"
+      version: "develop"
   tags: update
