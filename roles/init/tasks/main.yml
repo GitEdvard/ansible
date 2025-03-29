@@ -32,20 +32,6 @@
 - name: install nvm
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 
-- name: install emacs
-  become: true
-  apt:
-    name: emacs
-    state: present
-
-- name: create symlink for emacs config
-  ansible.builtin.file:
-    src: "{{ sources_adm }}/linux-settings/emacs_dir/emacs"
-    dest: "{{ user_home }}/.emacs"
-    owner: "{{ self_user }}"
-    group: "{{ self_user }}"
-    state: link
-
 - name: download fzf git repo
   ansible.builtin.git:
     repo: https://github.com/junegunn/fzf.git

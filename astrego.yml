@@ -28,5 +28,5 @@
       tags: vim
     - role: tmux
       tags: tmux
-    - role: java
-      tags: java
+    - role: astrego
+      tags: astrego
