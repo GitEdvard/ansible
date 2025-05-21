@@ -17,3 +17,18 @@
     - libxmlsec1-dev
     - libffi-dev
     - liblzma-dev
+
+- name: install Qt runtime
+  become: true
+  apt:
+    name: "{{ item }}"
+  loop:
+    - libxcb-xinerama0
+    - libqt5x11extras5
+    - network-manager
+  tags: qt
+
+- name: Install common installations on astrego
+  become: true
+  script: installations.sh
+  tags: thescript
